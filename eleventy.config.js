@@ -3,6 +3,9 @@ import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import fs from "fs";
+import markdownIt from "markdown-it";
+import markdownItAnchor from "markdown-it-anchor";
 
 import pluginFilters from "./_config/filters.js";
 
@@ -63,11 +66,11 @@ export default async function(eleventyConfig) {
 		},
 		metadata: {
 			language: "en",
-			title: "Blog Title",
-			subtitle: "This is a longer description about your blog.",
-			base: "https://example.com/",
+			title: "Geaux-Flow Agile Site",
+			subtitle: "My public display of agile affection using the Geaux-Flow method.",
+			base: "https://geaux-flow.netlify.app/",
 			author: {
-				name: "Your Name"
+				name: "Andrew Weisbeck"
 			}
 		}
 	});
@@ -153,3 +156,83 @@ export const config = {
 
 	// pathPrefix: "/",
 };
+
+eleventyConfig.setDataDeepMerge(true);
+
+eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
+
+eleventyConfig.addFilter("readableDate", dateObj => {
+	return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("dd LLL yyyy");
+});
+
+eleventyConfig.addFilter("htmlDateString", dateObj => {
+	return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+});
+
+// Get the first `n` elements of a collection.
+eleventyConfig.addFilter("head", (array, n) => {
+	if( n < 0 ) {
+		return array.slice(n);
+	}
+
+	return array.slice(0, n);
+});
+
+eleventyConfig.addCollection("tagList", function(collection) {
+	let tagSet = new Set();
+	collection.getAll().forEach(function(item) {
+		if( "tags" in item.data ) {
+			let tags = item.data.tags;
+
+			tags = tags.filter(function(item) {
+				switch(item) {
+					// this list should mach the `filter` list in tags.njk
+					case "all":
+					case "nav":
+					case "post":
+					case "posts":
+						return false;
+				}
+
+				return true;
+			});
+
+			for (const tag of tags) {
+				tagSet.add(tag);
+			}
+		}
+	});
+
+	return [...tagSet];
+});
+
+
+/* Markdown Overrides */
+let markdownLibrary = markdownIt({
+	html: true,
+	breaks: true,
+	linkify: true
+}).use(markdownItAnchor, {
+	permalink: true,
+	permalinkClass: "direct-link",
+	permalinkSymbol: "#"
+});
+
+eleventyConfig.setLibrary("md", markdownLibrary);
+
+// BrowserSync Overrides
+eleventyConfig.setBrowserSyncConfig({
+	callbacks: {
+		ready: function(err, browserSync) {
+			const content_404 = fs.readFileSync('_site/404.html');
+
+			browserSync.addMiddleware("*", (req, res) => {
+				// Provides the 404 content without redirect.
+				res.write(content_404);
+				res.end();
+			});
+		},
+	},
+	ui: false,
+	ghostMode: false
+});

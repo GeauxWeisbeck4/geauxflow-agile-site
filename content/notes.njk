@@ -1,0 +1,13 @@
+---
+title: Notes
+description: Main page for geaux-flow Notes
+layout: layouts/base.njk
+---
+
+<!-- 11ty Notes Header `<h1 class="text-center>Notes</h1>` -->
+
+<h1>Geaux Flow Notes Home</h1>
+
+{% for note in collections.notes %}
+    {% include "components/post-card.njk" %}
+{% endfor %}

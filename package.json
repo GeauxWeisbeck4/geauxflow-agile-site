@@ -1,7 +1,7 @@
 {
-	"name": "eleventy-base-blog",
-	"version": "9.0.0",
-	"description": "A starter repository for a blog web site using the Eleventy site generator.",
+	"name": "geauxflow-agile-site",
+	"version": "0.0.1",
+	"description": "My public display of productive-affection where I share my sincere appreciation and love for the Geaux-Flow Agile Workflow with you!",
 	"type": "module",
 	"scripts": {
 		"build": "npx @11ty/eleventy",
@@ -15,12 +15,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/11ty/eleventy-base-blog.git"
+		"url": "git://github.com/geauxweisbeck4/geauxflow-agile-site.git"
 	},
 	"author": {
-		"name": "Zach Leatherman",
-		"email": "zachleatherman@gmail.com",
-		"url": "https://zachleat.com/"
+		"name": "Andrew Weisbeck",
+		"email": "andrew.weisbeck@gmail.com",
+		"url": "https://geauxweisbeck4.dev/"
 	},
 	"license": "MIT",
 	"engines": {
@@ -28,12 +28,12 @@
 	},
 	"funding": {
 		"type": "opencollective",
-		"url": "https://opencollective.com/11ty"
+		"url": "https://opencollective.com/geauxweisbeck4"
 	},
 	"bugs": {
-		"url": "https://github.com/11ty/eleventy-base-blog/issues"
+		"url": "https://github.com/geauxweisbeck4/geauxflow-agile-site/issues"
 	},
-	"homepage": "https://github.com/11ty/eleventy-base-blog#readme",
+	"homepage": "https://github.com/geauxweisbeck4/geauxflow-agile-site#readme",
 	"devDependencies": {
 		"@11ty/eleventy": "^3.0.0",
 		"@11ty/eleventy-img": "^6.0.1",

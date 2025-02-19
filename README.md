@@ -8,11 +8,4 @@ This is a part of my Digital Garden that I share on the web. This specific site 
 
 [1] I suggest reading Cal Newports, Deep Work to learn more about deep work.
 
-## Tasks To Do
-
-You can track specific tasks and issues on the [project repository page](https://github.com/geauxweisbeck4/geauxflow-agile-site). There will soon be a Wiki, Community, and Project page.
-
-- [ ] Create Project for GeauxFlow Agile Site
-- [ ] Create Wiki Section for project
-- [ ] Set up community
-- [ ] Set up agile workflow
+## This README is a work in progress
